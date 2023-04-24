@@ -130,7 +130,11 @@ fun HomeScreen() {
             Spacer(modifier = Modifier.height(16.dp))
             McCarousel(modifier = Modifier.padding(horizontal = 16.dp))
             Spacer(modifier = Modifier.height(16.dp))
-            MiniMenu(modifier = Modifier.fillMaxWidth())
+            MainMenu(modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .fillMaxWidth())
+            Spacer(modifier = Modifier.height(16.dp))
+            SecondaryMenu(modifier = Modifier.fillMaxWidth())
             Spacer(modifier = Modifier.height(16.dp))
             ScheduleActivity(modifier = Modifier.fillMaxWidth())
         }

@@ -3,8 +3,6 @@ package tw.mason.mcdonalds.screen.home
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -26,7 +24,7 @@ import tw.mason.mcdonalds.R
 import tw.mason.mcdonalds.ui.theme.Gray
 import tw.mason.mcdonalds.ui.theme.YELLOW
 
-data class MiniMenuObj(
+data class SecondaryMenuObj(
     @DrawableRes val iconRes: Int,
     val text: String,
     val onClick: () -> Unit = {}
@@ -34,16 +32,16 @@ data class MiniMenuObj(
 
 @Preview
 @Composable
-fun MiniMenu(
+fun SecondaryMenu(
     modifier: Modifier = Modifier,
 ) {
     val items = listOf(
-        MiniMenuObj(R.drawable.round_card_giftcard_24, "最新任務"),
-        MiniMenuObj(R.drawable.outline_fastfood_24, "隨買店取"),
-        MiniMenuObj(R.drawable.baseline_delivery_dining_24, "歡樂送"),
-        MiniMenuObj(R.drawable.round_checklist_24, "滿意度調查"),
-        MiniMenuObj(R.drawable.round_add_circle_outline_24, "立即儲值"),
-        MiniMenuObj(R.drawable.round_list_alt_24, "交易紀錄"),
+        SecondaryMenuObj(R.drawable.round_card_giftcard_24, "最新任務"),
+        SecondaryMenuObj(R.drawable.outline_fastfood_24, "隨買店取"),
+        SecondaryMenuObj(R.drawable.baseline_delivery_dining_24, "歡樂送"),
+        SecondaryMenuObj(R.drawable.round_checklist_24, "滿意度調查"),
+        SecondaryMenuObj(R.drawable.round_add_circle_outline_24, "立即儲值"),
+        SecondaryMenuObj(R.drawable.round_list_alt_24, "交易紀錄"),
     )
     Row(
         modifier = modifier
@@ -51,11 +49,11 @@ fun MiniMenu(
     ) {
         Spacer(modifier = Modifier.width(16.dp))
             items.forEachIndexed { index, item ->
-            MiniMenuItem(
+            SecondaryMenuItem(
                 obj = item
             )
             if (index != items.lastIndex)
-                Spacer(modifier = Modifier.width(12.dp))
+                Spacer(modifier = Modifier.width(14.dp))
         }
         Spacer(modifier = Modifier.width(16.dp))
     }
@@ -63,9 +61,9 @@ fun MiniMenu(
 
 @Preview
 @Composable
-fun MiniMenuItem(
+fun SecondaryMenuItem(
     modifier: Modifier = Modifier,
-    obj: MiniMenuObj = MiniMenuObj(R.drawable.round_card_giftcard_24, "最新任務")
+    obj: SecondaryMenuObj = SecondaryMenuObj(R.drawable.round_card_giftcard_24, "最新任務")
 ) {
     Column(
         modifier = modifier
