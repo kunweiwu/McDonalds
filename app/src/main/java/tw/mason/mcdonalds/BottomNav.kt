@@ -1,11 +1,14 @@
 package tw.mason.mcdonalds
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -27,15 +30,11 @@ fun BottomNav() {
         currentDestination = currentDestination
     )
 
-    Scaffold(
-        bottomBar = {
-            BottomBar(navHelper = navHelper)
-        }
-    ) {
+    Box(modifier = Modifier) {
         NavHost(
             navController = navController,
             startDestination = BottomBarScreen.Home.route,
-            modifier = Modifier.padding(it)
+            modifier = Modifier.padding(bottom = BOTTOM_BAR_BASE_HEIGHT.dp)
         ) {
             composable(route = BottomBarScreen.Home.route) {
                 HomeScreen()
@@ -51,6 +50,12 @@ fun BottomNav() {
                 AccountScreen()
             }
         }
+        BottomBar(
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.BottomCenter),
+            navHelper = navHelper
+        )
     }
 }
 

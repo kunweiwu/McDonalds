@@ -13,9 +13,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ArrowForwardBtn() {
+fun ArrowForwardBtn(
+    onClick: () -> Unit
+) {
     IconButton(
-        onClick = { /*TODO*/ },
+        onClick = { onClick.invoke() },
         modifier = Modifier
             .background(Color(0xFFEFEFEF), CircleShape)
             .size(30.dp)

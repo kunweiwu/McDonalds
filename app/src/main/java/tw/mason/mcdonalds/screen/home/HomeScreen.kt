@@ -7,8 +7,6 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,6 +20,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -116,10 +115,7 @@ fun HomeScreen() {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .scrollable(
-                    state = rememberScrollState(),
-                    orientation = Orientation.Vertical
-                )
+                .verticalScroll(rememberScrollState())
         ) {
             Text(
                 text = "晚安!",
@@ -130,13 +126,15 @@ fun HomeScreen() {
             Spacer(modifier = Modifier.height(16.dp))
             McCarousel(modifier = Modifier.padding(horizontal = 16.dp))
             Spacer(modifier = Modifier.height(16.dp))
-            MainMenu(modifier = Modifier
-                .padding(horizontal = 16.dp)
-                .fillMaxWidth())
+            MainMenu(
+                modifier = Modifier
+                    .padding(horizontal = 16.dp)
+                    .fillMaxWidth()
+            )
             Spacer(modifier = Modifier.height(16.dp))
             SecondaryMenu(modifier = Modifier.fillMaxWidth())
             Spacer(modifier = Modifier.height(16.dp))
-            ScheduleActivity(modifier = Modifier.fillMaxWidth())
+            SectionSchedule(modifier = Modifier.fillMaxWidth())
         }
     }
 }

@@ -1,18 +1,14 @@
 package tw.mason.mcdonalds.screen.home
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -23,22 +19,15 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 
 @Composable
-fun ScheduleActivity(
+fun SectionSchedule(
     modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            HomeTitle(text = "強檔活動")
-            ArrowForwardBtn()
-        }
+        HomeSectionHeader(
+            text = "強檔活動"
+        )
         Spacer(modifier = Modifier.height(8.dp))
         val activities = listOf(
             "https:/www.mcdonalds.com/content/dam/sites/tw/hero/2023/0407-fof2336x1040.jpg",

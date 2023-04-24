@@ -24,25 +24,30 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import tw.mason.mcdonalds.ui.theme.DarkRed
 import tw.mason.mcdonalds.ui.theme.Gray
 
+
+const val BOTTOM_BAR_BASE_HEIGHT = 45
+
 @Preview(widthDp = 350)
 @Composable
 fun BottomBar(
+    modifier: Modifier = Modifier,
     navHelper: NavigationHelper? = null
 ) {
     Row(
-        modifier = Modifier
-            .background(Color.Transparent),
+        modifier = modifier.background(Color.Transparent),
         horizontalArrangement = Arrangement.SpaceAround,
         verticalAlignment = Alignment.Bottom
     ) {
+        val baseHeight = BOTTOM_BAR_BASE_HEIGHT.dp
         val tabModifier = Modifier
             .weight(1f)
-            .height(44.dp)
+            .height(baseHeight)
         MainTab(
             modifier = tabModifier,
             text = "首頁",
@@ -63,6 +68,7 @@ fun BottomBar(
             modifier = Modifier.clickable {
                 // TODO
             },
+            baseHeight = baseHeight,
             text = "付款/儲值",
         )
         MainTab(
@@ -87,12 +93,13 @@ fun BottomBar(
 @Composable
 fun RowScope.PayTab(
     modifier: Modifier,
+    baseHeight: Dp,
     text: String,
 ) {
     Box(
         modifier = modifier
             .weight(1f)
-            .height(64.dp)
+            .height(baseHeight + 20.dp)
     ) {
         Box(
             modifier = Modifier
@@ -116,7 +123,7 @@ fun RowScope.PayTab(
         }
         Box(
             modifier = Modifier
-                .height(44.dp)
+                .height(baseHeight)
                 .background(Color.White)
                 .align(Alignment.BottomCenter),
         ) {
