@@ -92,7 +92,7 @@ fun RowScope.MainMenuItem(
         Spacer(modifier = Modifier.height(4.dp))
         Text(
             text = obj.value.toString(),
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.ExtraBold
         )
     }
 }

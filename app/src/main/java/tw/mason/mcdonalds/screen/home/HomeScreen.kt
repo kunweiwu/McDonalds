@@ -135,6 +135,8 @@ fun HomeScreen() {
             SecondaryMenu(modifier = Modifier.fillMaxWidth())
             Spacer(modifier = Modifier.height(16.dp))
             SectionSchedule(modifier = Modifier.fillMaxWidth())
+            Spacer(modifier = Modifier.height(16.dp))
+            SectionTask(modifier = Modifier.fillMaxWidth())
         }
     }
 }
