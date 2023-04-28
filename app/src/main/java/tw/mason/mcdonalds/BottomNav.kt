@@ -15,7 +15,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import tw.mason.mcdonalds.screen.AccountScreen
 import tw.mason.mcdonalds.screen.home.HomeScreen
-import tw.mason.mcdonalds.screen.PayScreen
+import tw.mason.mcdonalds.screen.PointScreen
 import tw.mason.mcdonalds.screen.TaskScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -44,7 +44,7 @@ fun BottomNav() {
             }
 
             composable(route = BottomBarScreen.Point.route) {
-                PayScreen()
+                PointScreen()
             }
             composable(route = BottomBarScreen.Account.route) {
                 AccountScreen()
