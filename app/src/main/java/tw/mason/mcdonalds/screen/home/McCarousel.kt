@@ -35,7 +35,7 @@ fun McCarousel(
                     .build(),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.height(140.dp)
+                modifier = Modifier.height(160.dp)
             )
         })
     }

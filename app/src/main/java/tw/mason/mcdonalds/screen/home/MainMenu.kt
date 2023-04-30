@@ -86,7 +86,7 @@ fun RowScope.MainMenuItem(
             painter = painterResource(id = obj.iconRes),
             contentDescription = null,
             tint = obj.tint,
-            modifier = Modifier.size(24.dp)
+            modifier = Modifier.size(22.dp)
         )
         Text(text = obj.text, fontSize = MaterialTheme.typography.labelSmall.fontSize)
         Spacer(modifier = Modifier.height(4.dp))

@@ -8,9 +8,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedIconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -48,7 +50,7 @@ fun SecondaryMenu(
             .horizontalScroll(rememberScrollState()),
     ) {
         Spacer(modifier = Modifier.width(16.dp))
-            items.forEachIndexed { index, item ->
+        items.forEachIndexed { index, item ->
             SecondaryMenuItem(
                 obj = item
             )
@@ -78,9 +80,13 @@ fun SecondaryMenuItem(
             Icon(
                 painter = painterResource(id = obj.iconRes),
                 contentDescription = null,
-                tint = YELLOW
+                tint = YELLOW,
+                modifier = Modifier.size(24.dp)
             )
         }
-        Text(text = obj.text)
+        Text(
+            text = obj.text,
+            fontSize = MaterialTheme.typography.labelMedium.fontSize
+        )
     }
 }

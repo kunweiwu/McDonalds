@@ -3,7 +3,6 @@ package tw.mason.mcdonalds
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -14,11 +13,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import tw.mason.mcdonalds.screen.AccountScreen
-import tw.mason.mcdonalds.screen.home.HomeScreen
 import tw.mason.mcdonalds.screen.PointScreen
 import tw.mason.mcdonalds.screen.TaskScreen
+import tw.mason.mcdonalds.screen.home.HomeScreen
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottomNav() {
     val navController = rememberNavController()

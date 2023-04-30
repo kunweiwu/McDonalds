@@ -48,70 +48,7 @@ fun HomeScreen() {
             .fillMaxSize()
             .background(Color.White)
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            val infiniteTransition = rememberInfiniteTransition()
-            val angle by infiniteTransition.animateFloat(
-                initialValue = 0F,
-                targetValue = 360F,
-                animationSpec = infiniteRepeatable(
-                    animation = tween(5000, easing = LinearEasing)
-                )
-            )
-            Image(
-                painter = painterResource(id = R.drawable.img_home_icon),
-                contentDescription = null,
-                modifier = Modifier
-                    .size(44.dp)
-                    .shadow(0.dp)
-                    .rotate(angle)
-            )
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.End
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.img_card_red),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(30.dp)
-                        .align(Alignment.CenterVertically)
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Box(
-                    modifier = Modifier.size(38.dp)
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.outline_notifications_24),
-                        contentDescription = null,
-                        tint = Color(0xFFB4B4B4),
-                        modifier = Modifier
-                            .size(34.dp)
-                            .scale(1f, 0.9f)
-                            .align(Alignment.Center)
-                    )
-                    Box(
-                        modifier = Modifier
-                            .align(Alignment.TopEnd)
-                            .fillMaxSize(0.5f)
-                            .clip(CircleShape)
-                            .background(YELLOW)
-                    ) {
-                        Text(
-                            text = "3",
-                            fontSize = MaterialTheme.typography.labelMedium.fontSize,
-                            color = Color.White,
-                            modifier = Modifier.align(Alignment.Center)
-
-                        )
-                    }
-                }
-            }
-        }
+        TopSection()
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -119,7 +56,7 @@ fun HomeScreen() {
         ) {
             Text(
                 text = "晚安!",
-                fontSize = MaterialTheme.typography.bodyLarge.fontSize,
+                fontStyle = MaterialTheme.typography.bodyLarge.fontStyle,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
@@ -137,6 +74,74 @@ fun HomeScreen() {
             SectionSchedule(modifier = Modifier.fillMaxWidth())
             Spacer(modifier = Modifier.height(16.dp))
             SectionTask(modifier = Modifier.fillMaxWidth())
+        }
+    }
+}
+
+@Composable
+private fun TopSection() {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        val infiniteTransition = rememberInfiniteTransition()
+        val angle by infiniteTransition.animateFloat(
+            initialValue = 0F,
+            targetValue = 360F,
+            animationSpec = infiniteRepeatable(
+                animation = tween(10000, easing = LinearEasing)
+            )
+        )
+        Image(
+            painter = painterResource(id = R.drawable.img_home_icon),
+            contentDescription = null,
+            modifier = Modifier
+                .size(38.dp)
+                .shadow(0.dp)
+                .rotate(angle)
+        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.End
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.img_card_red),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(30.dp)
+                    .align(Alignment.CenterVertically)
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Box(
+                modifier = Modifier.size(38.dp)
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.outline_notifications_24),
+                    contentDescription = null,
+                    tint = Color(0xFFB4B4B4),
+                    modifier = Modifier
+                        .size(34.dp)
+                        .scale(1f, 0.9f)
+                        .align(Alignment.Center)
+                )
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.TopEnd)
+                        .fillMaxSize(0.5f)
+                        .clip(CircleShape)
+                        .background(YELLOW)
+                ) {
+                    Text(
+                        text = "3",
+                        fontSize = MaterialTheme.typography.labelMedium.fontSize,
+                        color = Color.White,
+                        modifier = Modifier.align(Alignment.Center)
+
+                    )
+                }
+            }
         }
     }
 }
