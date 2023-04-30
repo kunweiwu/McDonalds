@@ -8,9 +8,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -31,7 +33,7 @@ import tw.mason.mcdonalds.ui.theme.DarkRed
 import tw.mason.mcdonalds.ui.theme.Gray
 
 
-const val BOTTOM_BAR_BASE_HEIGHT = 45
+const val BOTTOM_BAR_BASE_HEIGHT = 48
 
 @Preview(widthDp = 350)
 @Composable
@@ -74,7 +76,7 @@ fun BottomBar(
         MainTab(
             modifier = tabModifier,
             text = "點數商城",
-            iconPainter = painterResource(id = R.drawable.round_local_parking_24),
+            iconPainter = painterResource(id = R.drawable.img_p_with_round),
             isSelected = navHelper?.isSelected(BottomBarScreen.Point) ?: false
         ) {
             navHelper?.toScreen(BottomBarScreen.Point)
@@ -117,6 +119,7 @@ fun RowScope.PayTab(
                 contentDescription = text,
                 tint = Color.White,
                 modifier = Modifier
+                    .fillMaxSize()
                     .padding(8.dp)
                     .align(Alignment.Center)
             )
@@ -160,6 +163,7 @@ fun MainTab(
             painter = iconPainter,
             tint = color,
             contentDescription = text,
+            modifier = Modifier.size(26.dp)
         )
         Text(
             text = text,

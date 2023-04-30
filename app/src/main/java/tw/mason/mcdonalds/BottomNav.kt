@@ -13,7 +13,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import tw.mason.mcdonalds.screen.AccountScreen
-import tw.mason.mcdonalds.screen.PointScreen
+import tw.mason.mcdonalds.screen.point.PointScreen
 import tw.mason.mcdonalds.screen.TaskScreen
 import tw.mason.mcdonalds.screen.home.HomeScreen
 

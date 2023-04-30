@@ -39,7 +39,7 @@ fun MainMenu(
 ) {
     val items = listOf(
         MainMenuObj(),
-        MainMenuObj(iconRes = R.drawable.round_local_parking_24, text = "點數", value = 99999),
+        MainMenuObj(iconRes = R.drawable.img_p_with_round, text = "點數", value = 99999),
         MainMenuObj(
             iconRes = R.drawable.baseline_videogame_asset_24,
             tint = YELLOW,
