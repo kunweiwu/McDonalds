@@ -4,11 +4,13 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -36,19 +38,17 @@ data class PointExchangeItem(
     val imageUrl: String,
 )
 
-@Preview
 @Composable
-fun PointItem(
+fun RowScope.PointItem(
     image: @Composable ColumnScope.() -> Unit = {},
     text: String = "中杯可口可樂",
     pointText: String = "40"
 ) {
     Column(
         modifier = Modifier
-            .fillMaxWidth()
+            .weight(1f)
             .clip(RoundedCornerShape(16.dp))
-            .background(Color.White)
-            .padding(8.dp),
+            .background(Color.White),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         image()
@@ -75,11 +75,11 @@ fun PointItem(
             Text(
                 text = pointText,
                 fontWeight = FontWeight.ExtraBold,
-                fontSize = MaterialTheme.typography.labelMedium.fontSize
+                fontSize = MaterialTheme.typography.labelLarge.fontSize
             )
         }
         // todo 加價換
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(22.dp))
         ExchangeButton()
     }
 }
@@ -89,8 +89,15 @@ fun PointItem(
 private fun ExchangeButton() {
     OutlinedButton(
         onClick = { /*TODO*/ },
-        border = BorderStroke(1.dp, YELLOW)
+        border = BorderStroke(1.dp, YELLOW),
+        contentPadding = PaddingValues(horizontal = 18.dp, vertical = 10.dp),
+        modifier = Modifier
+            .defaultMinSize(minWidth = 1.dp, minHeight = 1.dp)
     ) {
-        Text(text = "兌換", color = YELLOW)
+        Text(
+            text = "兌換",
+            color = YELLOW,
+            fontSize = MaterialTheme.typography.labelLarge.fontSize
+        )
     }
 }

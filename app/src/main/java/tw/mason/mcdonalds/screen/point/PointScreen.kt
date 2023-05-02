@@ -1,6 +1,7 @@
 package tw.mason.mcdonalds.screen.point
 
 import androidx.annotation.DrawableRes
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -16,13 +17,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.GridItemSpan
-import androidx.compose.foundation.lazy.grid.LazyGridItemScope
-import androidx.compose.foundation.lazy.grid.LazyGridScope
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
@@ -49,84 +45,116 @@ import tw.mason.mcdonalds.ui.theme.YELLOW
 
 private val horizontalPadding = 16.dp
 
+private val list = listOf(
+    PointExchangeItem(
+        "中杯可口可樂",
+        40,
+        "https://s7d1.scene7.com/is/image/mcdonalds/coke-zero_860x822_2:nutrition-calculator-tile-desktop?resmode=sharp2"
+    ),
+    PointExchangeItem(
+        "中杯檸檬風味紅茶",
+        40,
+        "https://s7d1.scene7.com/is/image/mcdonalds/iced-black-tea-lemon-flavor_832x822:nutrition-calculator-tile-desktop?resmode=sharp2"
+    ),
+    PointExchangeItem(
+        "原味麥脆炸雞(2塊)",
+        120,
+        "https://s7d1.scene7.com/is/image/mcdonalds/chicken-mccrispy-2-pieces_832x822:1-4-product-tile-desktop"
+    ),
+    PointExchangeItem(
+        "辣味麥脆炸雞(2塊)",
+        120,
+        "https://s7d1.scene7.com/is/image/mcdonalds/spicy-chicken-mccrispy-2-pieces_0321-3:1-4-product-tile-desktop"
+    ),
+    PointExchangeItem(
+        "麥克雞塊(10塊)",
+        100,
+        "https://s7d1.scene7.com/is/image/mcdonalds/chicken-mcnuggets-10-pieces_832x822:1-4-product-tile-desktop"
+    ),
+    PointExchangeItem(
+        "薯餅",
+        30,
+        "https://s7d1.scene7.com/is/image/mcdonalds/hash-browns_832x822:1-4-product-tile-desktop"
+    ),
+)
+
+private val bgColor = Color(0xFFFBFBFB)
+
 @Preview
 @Composable
 fun PointScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFFBFBFB))
+            .background(bgColor)
             .padding(top = 20.dp)
     ) {
         TopSection()
         Spacer(modifier = Modifier.height(12.dp))
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
+        LazyColumn(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = horizontalPadding),
-            state = rememberLazyGridState(),
-            verticalArrangement = Arrangement.spacedBy(10.dp),
-            horizontalArrangement = Arrangement.spacedBy(10.dp)
+                .fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            header {
-                Column(
-                    modifier = Modifier
-                ) {
-                    SearchBar()
-                    Spacer(modifier = Modifier.height(8.dp))
-                    TagSection()
-                }
+            item {
+                SearchBar()
             }
-            val list = listOf(
-                PointExchangeItem(
-                    "中杯可口可樂",
-                    40,
-                    "https://s7d1.scene7.com/is/image/mcdonalds/coke-zero_860x822_2:nutrition-calculator-tile-desktop?resmode=sharp2"
-                ),
-                PointExchangeItem(
-                    "中杯檸檬風味紅茶",
-                    40,
-                    "https://s7d1.scene7.com/is/image/mcdonalds/iced-black-tea-lemon-flavor_832x822:nutrition-calculator-tile-desktop?resmode=sharp2"
-                ),
-                PointExchangeItem(
-                    "原味麥脆炸雞(2塊)",
-                    120,
-                    "https://s7d1.scene7.com/is/image/mcdonalds/chicken-mccrispy-2-pieces_832x822:1-4-product-tile-desktop"
-                ),
-                PointExchangeItem(
-                    "辣味麥脆炸雞(2塊)",
-                    120,
-                    "https://s7d1.scene7.com/is/image/mcdonalds/spicy-chicken-mccrispy-2-pieces_0321-3:1-4-product-tile-desktop"
-                ),
-            )
-            items(list) {
-                PointItem(
-                    text = it.name,
-                    pointText = it.point.toString(),
-                    image = {
-                        AsyncImage(
-                            model = ImageRequest.Builder(LocalContext.current)
-                                .data(it.imageUrl)
-                                .build(),
-                            contentDescription = null,
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier
-                                .padding(10.dp)
-                                .fillMaxWidth()
-                                .height(90.dp)
+            @OptIn(ExperimentalFoundationApi::class)
+            stickyHeader {
+                TagSection()
+            }
+            itemsIndexed(list) { index, _ ->
+                print(index)
+                Row(
+                    modifier = Modifier.padding(horizontal = horizontalPadding)
+                ) {
+                    val itemLeft = list.getOrNull(index * 2)
+                    if (itemLeft != null) {
+                        PointItem(
+                            text = itemLeft.name,
+                            pointText = itemLeft.point.toString(),
+                            image = {
+                                AsyncImage(
+                                    model = ImageRequest.Builder(LocalContext.current)
+                                        .data(itemLeft.imageUrl)
+                                        .build(),
+                                    contentDescription = null,
+                                    contentScale = ContentScale.Crop,
+                                    modifier = Modifier
+                                        .padding(10.dp)
+                                        .fillMaxWidth()
+                                        .height(90.dp)
+                                )
+                            }
                         )
+                        Spacer(modifier = Modifier.width(10.dp))
+                        val itemRight = list.getOrNull(index * 2 + 1)
+                        if (itemRight != null) {
+                            PointItem(
+                                text = itemRight.name,
+                                pointText = itemRight.point.toString(),
+                                image = {
+                                    AsyncImage(
+                                        model = ImageRequest.Builder(LocalContext.current)
+                                            .data(itemRight.imageUrl)
+                                            .build(),
+                                        contentDescription = null,
+                                        contentScale = ContentScale.Crop,
+                                        modifier = Modifier
+                                            .padding(10.dp)
+                                            .fillMaxWidth()
+                                            .height(90.dp)
+                                    )
+                                }
+                            )
+                        } else {
+                            Spacer(modifier = Modifier.weight(1f))
+                        }
                     }
-                )
+                }
             }
         }
     }
-}
-
-fun LazyGridScope.header(
-    content: @Composable LazyGridItemScope.() -> Unit
-) {
-    item(span = { GridItemSpan(this.maxLineSpan) }, content = content)
 }
 
 @Composable
@@ -138,6 +166,7 @@ private fun TagSection() {
         modifier = Modifier
             .fillMaxWidth()
             .horizontalScroll(rememberScrollState())
+            .background(bgColor)
     ) {
         Spacer(modifier = Modifier.width(horizontalPadding - space))
         TabButton(
@@ -187,7 +216,7 @@ private fun SearchBar() {
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = horizontalPadding)
-            .background(Color(0xFFF8F8F8), CircleShape)
+            .background(Color(0xFFF4F4F4), CircleShape)
     ) {
         Icon(
             painter = painterResource(id = R.drawable.round_search_24),
