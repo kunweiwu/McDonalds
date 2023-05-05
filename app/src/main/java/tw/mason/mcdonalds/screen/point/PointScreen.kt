@@ -23,6 +23,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -45,44 +46,13 @@ import tw.mason.mcdonalds.ui.theme.YELLOW
 
 private val horizontalPadding = 16.dp
 
-private val list = listOf(
-    PointExchangeItem(
-        "中杯可口可樂",
-        40,
-        "https://s7d1.scene7.com/is/image/mcdonalds/coke-zero_860x822_2:nutrition-calculator-tile-desktop?resmode=sharp2"
-    ),
-    PointExchangeItem(
-        "中杯檸檬風味紅茶",
-        40,
-        "https://s7d1.scene7.com/is/image/mcdonalds/iced-black-tea-lemon-flavor_832x822:nutrition-calculator-tile-desktop?resmode=sharp2"
-    ),
-    PointExchangeItem(
-        "原味麥脆炸雞(2塊)",
-        120,
-        "https://s7d1.scene7.com/is/image/mcdonalds/chicken-mccrispy-2-pieces_832x822:1-4-product-tile-desktop"
-    ),
-    PointExchangeItem(
-        "辣味麥脆炸雞(2塊)",
-        120,
-        "https://s7d1.scene7.com/is/image/mcdonalds/spicy-chicken-mccrispy-2-pieces_0321-3:1-4-product-tile-desktop"
-    ),
-    PointExchangeItem(
-        "麥克雞塊(10塊)",
-        100,
-        "https://s7d1.scene7.com/is/image/mcdonalds/chicken-mcnuggets-10-pieces_832x822:1-4-product-tile-desktop"
-    ),
-    PointExchangeItem(
-        "薯餅",
-        30,
-        "https://s7d1.scene7.com/is/image/mcdonalds/hash-browns_832x822:1-4-product-tile-desktop"
-    ),
-)
-
 private val bgColor = Color(0xFFFBFBFB)
 
 @Preview
 @Composable
-fun PointScreen() {
+fun PointScreen(
+    uiState: PointUiState = PointUiState.Success()
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -94,7 +64,8 @@ fun PointScreen() {
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(10.dp)
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             item {
                 SearchBar()
@@ -103,52 +74,64 @@ fun PointScreen() {
             stickyHeader {
                 TagSection()
             }
-            itemsIndexed(list) { index, _ ->
-                print(index)
-                Row(
-                    modifier = Modifier.padding(horizontal = horizontalPadding)
-                ) {
-                    val itemLeft = list.getOrNull(index * 2)
-                    if (itemLeft != null) {
-                        PointItem(
-                            text = itemLeft.name,
-                            pointText = itemLeft.point.toString(),
-                            image = {
-                                AsyncImage(
-                                    model = ImageRequest.Builder(LocalContext.current)
-                                        .data(itemLeft.imageUrl)
-                                        .build(),
-                                    contentDescription = null,
-                                    contentScale = ContentScale.Crop,
-                                    modifier = Modifier
-                                        .padding(10.dp)
-                                        .fillMaxWidth()
-                                        .height(90.dp)
-                                )
-                            }
+            when(uiState) {
+                is PointUiState.Loading -> {
+                    item {
+                        CircularProgressIndicator(
+                            modifier = Modifier
+                                .fillMaxWidth(0.2f)
                         )
-                        Spacer(modifier = Modifier.width(10.dp))
-                        val itemRight = list.getOrNull(index * 2 + 1)
-                        if (itemRight != null) {
-                            PointItem(
-                                text = itemRight.name,
-                                pointText = itemRight.point.toString(),
-                                image = {
-                                    AsyncImage(
-                                        model = ImageRequest.Builder(LocalContext.current)
-                                            .data(itemRight.imageUrl)
-                                            .build(),
-                                        contentDescription = null,
-                                        contentScale = ContentScale.Crop,
-                                        modifier = Modifier
-                                            .padding(10.dp)
-                                            .fillMaxWidth()
-                                            .height(90.dp)
+                    }
+                }
+                is PointUiState.Success -> {
+                    itemsIndexed(uiState.list) { index, _ ->
+                        print(index)
+                        Row(
+                            modifier = Modifier.padding(horizontal = horizontalPadding)
+                        ) {
+                            val itemLeft = uiState.list.getOrNull(index * 2)
+                            if (itemLeft != null) {
+                                PointItem(
+                                    text = itemLeft.name,
+                                    pointText = itemLeft.point.toString(),
+                                    image = {
+                                        AsyncImage(
+                                            model = ImageRequest.Builder(LocalContext.current)
+                                                .data(itemLeft.imageUrl)
+                                                .build(),
+                                            contentDescription = null,
+                                            contentScale = ContentScale.Crop,
+                                            modifier = Modifier
+                                                .padding(10.dp)
+                                                .fillMaxWidth()
+                                                .height(90.dp)
+                                        )
+                                    }
+                                )
+                                Spacer(modifier = Modifier.width(10.dp))
+                                val itemRight = uiState.list.getOrNull(index * 2 + 1)
+                                if (itemRight != null) {
+                                    PointItem(
+                                        text = itemRight.name,
+                                        pointText = itemRight.point.toString(),
+                                        image = {
+                                            AsyncImage(
+                                                model = ImageRequest.Builder(LocalContext.current)
+                                                    .data(itemRight.imageUrl)
+                                                    .build(),
+                                                contentDescription = null,
+                                                contentScale = ContentScale.Crop,
+                                                modifier = Modifier
+                                                    .padding(10.dp)
+                                                    .fillMaxWidth()
+                                                    .height(90.dp)
+                                            )
+                                        }
                                     )
+                                } else {
+                                    Spacer(modifier = Modifier.weight(1f))
                                 }
-                            )
-                        } else {
-                            Spacer(modifier = Modifier.weight(1f))
+                            }
                         }
                     }
                 }

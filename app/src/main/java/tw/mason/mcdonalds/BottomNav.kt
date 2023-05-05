@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -12,10 +13,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import org.koin.androidx.compose.koinViewModel
 import tw.mason.mcdonalds.screen.AccountScreen
-import tw.mason.mcdonalds.screen.point.PointScreen
 import tw.mason.mcdonalds.screen.TaskScreen
 import tw.mason.mcdonalds.screen.home.HomeScreen
+import tw.mason.mcdonalds.screen.point.PointScreen
+import tw.mason.mcdonalds.screen.point.PointViewModel
 
 @Composable
 fun BottomNav() {
@@ -42,7 +45,9 @@ fun BottomNav() {
             }
 
             composable(route = BottomBarScreen.Point.route) {
-                PointScreen()
+                val viewModel = koinViewModel<PointViewModel>()
+                val state by viewModel.uiState.collectAsState()
+                PointScreen(state)
             }
             composable(route = BottomBarScreen.Account.route) {
                 AccountScreen()
