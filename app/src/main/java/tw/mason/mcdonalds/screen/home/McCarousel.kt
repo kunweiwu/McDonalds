@@ -2,6 +2,7 @@ package tw.mason.mcdonalds.screen.home
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.runtime.Composable
@@ -27,7 +28,10 @@ fun McCarousel(
         shape = RoundedCornerShape(8.dp)
     ) {
         @OptIn(ExperimentalFoundationApi::class)
-        (AutoSlidingCarousel(itemsCount = images.size) { index ->
+        (AutoSlidingCarousel(
+            itemsCount = images.size,
+            pagerState = rememberPagerState { images.size }
+        ) { index ->
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(images[index])

@@ -38,7 +38,7 @@ const val AUTO_SLIDE_DURATION = 3000L
 fun AutoSlidingCarousel(
     modifier: Modifier = Modifier,
     autoSlideDuration: Long = AUTO_SLIDE_DURATION,
-    pagerState: PagerState = rememberPagerState(),
+    pagerState: PagerState,
     itemsCount: Int,
     itemContent: @Composable (index: Int) -> Unit
 ) {
@@ -53,7 +53,7 @@ fun AutoSlidingCarousel(
     }
 
     Box(modifier = modifier.fillMaxWidth()) {
-        HorizontalPager(pageCount = itemsCount, state = pagerState) { index ->
+        HorizontalPager(state = pagerState) { index ->
             itemContent(index)
         }
 
