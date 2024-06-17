@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1096732870156",
+    "project_id": "fastlaneforandroid",
+    "storage_bucket": "fastlaneforandroid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096732870156:android:9d2cd027ad33a14b785029",
+        "android_client_info": {
+          "package_name": "tw.mason.mcdonalds"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwQpjzQYA76v-B6m3mV5SUo0KJVGSHc0E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
