@@ -1,12 +1,13 @@
 package tw.mason.mcdonalds
 
-import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-
+import androidx.test.platform.app.InstrumentationRegistry
+import org.junit.Assert.assertEquals
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-
-import org.junit.Assert.*
+import tools.fastlane.screengrab.Screengrab
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -20,5 +21,17 @@ class ExampleInstrumentedTest {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         assertEquals("tw.mason.mcdonalds", appContext.packageName)
+    }
+
+    /**
+     * Use [ActivityScenarioRule] to create and launch the activity under test before each test,
+     * and close it after each test.
+     */
+    @get:Rule
+    var activityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
+
+    @Test
+    fun testTakeScreenshot() {
+        Screengrab.screenshot("test")
     }
 }
